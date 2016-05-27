@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TimerSelectViewController" customModule="Kairos" customModuleProvider="target">
             <connections>
+                <outlet property="nameToSet" destination="5Hr-zg-1Hp" id="58X-U5-JfY"/>
                 <outlet property="timeRemainingMessage" destination="K6l-rZ-1qq" id="GZc-nt-NXR"/>
                 <outlet property="timeToSet" destination="d30-hf-qGY" id="jjo-02-8Js"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

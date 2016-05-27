@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372C6C321CF8D44D0046C94A /* NSDate_extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372C6C311CF8D44D0046C94A /* NSDate_extend.swift */; };
 		37B53D2C1CE905F0000C7ECE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B53D2B1CE905F0000C7ECE /* AppDelegate.swift */; };
 		37B53D2E1CE905F0000C7ECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37B53D2D1CE905F0000C7ECE /* Assets.xcassets */; };
 		37B53D311CE905F0000C7ECE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B53D2F1CE905F0000C7ECE /* MainMenu.xib */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		372C6C311CF8D44D0046C94A /* NSDate_extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate_extend.swift; sourceTree = "<group>"; };
 		37B53D281CE905F0000C7ECE /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37B53D2B1CE905F0000C7ECE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37B53D2D1CE905F0000C7ECE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				37B53D2B1CE905F0000C7ECE /* AppDelegate.swift */,
 				37B53D461CE917D9000C7ECE /* TimerSelectViewController.swift */,
+				372C6C311CF8D44D0046C94A /* NSDate_extend.swift */,
 				37B53D4A1CE91BCF000C7ECE /* Timer.swift */,
 				37B53D471CE917D9000C7ECE /* TimerSelectViewController.xib */,
 				37B53D2D1CE905F0000C7ECE /* Assets.xcassets */,
@@ -201,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				372C6C321CF8D44D0046C94A /* NSDate_extend.swift in Sources */,
 				37B53D4B1CE91BCF000C7ECE /* Timer.swift in Sources */,
 				37B53D481CE917D9000C7ECE /* TimerSelectViewController.swift in Sources */,
 				37B53D2C1CE905F0000C7ECE /* AppDelegate.swift in Sources */,
