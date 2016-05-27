@@ -13,6 +13,7 @@
 		37B53D3C1CE905F0000C7ECE /* KairosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B53D3B1CE905F0000C7ECE /* KairosTests.swift */; };
 		37B53D481CE917D9000C7ECE /* TimerSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B53D461CE917D9000C7ECE /* TimerSelectViewController.swift */; };
 		37B53D491CE917D9000C7ECE /* TimerSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B53D471CE917D9000C7ECE /* TimerSelectViewController.xib */; };
+		37B53D4B1CE91BCF000C7ECE /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B53D4A1CE91BCF000C7ECE /* Timer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		37B53D3D1CE905F0000C7ECE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37B53D461CE917D9000C7ECE /* TimerSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSelectViewController.swift; sourceTree = "<group>"; };
 		37B53D471CE917D9000C7ECE /* TimerSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerSelectViewController.xib; sourceTree = "<group>"; };
+		37B53D4A1CE91BCF000C7ECE /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				37B53D2B1CE905F0000C7ECE /* AppDelegate.swift */,
 				37B53D461CE917D9000C7ECE /* TimerSelectViewController.swift */,
+				37B53D4A1CE91BCF000C7ECE /* Timer.swift */,
 				37B53D471CE917D9000C7ECE /* TimerSelectViewController.xib */,
 				37B53D2D1CE905F0000C7ECE /* Assets.xcassets */,
 				37B53D2F1CE905F0000C7ECE /* MainMenu.xib */,
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37B53D4B1CE91BCF000C7ECE /* Timer.swift in Sources */,
 				37B53D481CE917D9000C7ECE /* TimerSelectViewController.swift in Sources */,
 				37B53D2C1CE905F0000C7ECE /* AppDelegate.swift in Sources */,
 			);
