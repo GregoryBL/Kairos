@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Timer: NSObject {
+class Timer: NSObject, NSCopying {
     let name: String
     let interval: NSTimeInterval
     let startTime: NSDate
@@ -17,5 +17,9 @@ class Timer: NSObject {
         self.name = name
         self.interval = interval
         self.startTime = startTime
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        return Timer(name: name, interval: interval, startTime: startTime)
     }
 }

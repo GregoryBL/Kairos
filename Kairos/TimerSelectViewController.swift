@@ -26,25 +26,26 @@ class TimerSelectViewController: NSViewController {
         }
     }
     
-    func makeNewTimer(sender: NSButton) {
+    @IBAction func makeNewTimer(sender: NSButton) {
         
         currentTimer = Timer(name: self.nameToSet.stringValue, interval: self.timeToSet.doubleValue, startTime: NSDate())
     }
     
     @IBAction func startTimer(sender: NSButton) {
         
-        let timer = Timer(name: "First Timer", interval: timeToSet.doubleValue, startTime: NSDate())
-        
-        NSTimer.scheduledTimerWithTimeInterval(timer.interval,
-                                               target: self,
-                                               selector: #selector(self.timerFinished(_:)),
-                                               userInfo: timer,
-                                               repeats: false)
-        NSTimer.scheduledTimerWithTimeInterval(0.5,
-                                               target: self,
-                                               selector: #selector(self.updateTimeLeft(_:)),
-                                               userInfo: timer,
-                                               repeats: true)
+        if let timer = currentTimer?.copy() {
+            
+            NSTimer.scheduledTimerWithTimeInterval(timer.interval,
+                                                   target: self,
+                                                   selector: #selector(self.timerFinished(_:)),
+                                                   userInfo: timer,
+                                                   repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(0.5,
+                                                   target: self,
+                                                   selector: #selector(self.updateTimeLeft(_:)),
+                                                   userInfo: timer,
+                                                   repeats: true)
+        }
     }
     
     func updateTimeLeft(sender: NSTimer) {

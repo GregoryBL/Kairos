@@ -41,6 +41,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="makeNewTimer:" target="-2" id="PCo-68-tQn"/>
+                    </connections>
                 </button>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Hr-zg-1Hp">
                     <rect key="frame" x="364" y="81" width="96" height="22"/>
