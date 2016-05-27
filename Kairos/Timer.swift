@@ -8,11 +8,14 @@
 
 import Foundation
 
-struct Timer {
+class Timer: NSObject {
     let name: String
-    var interval: NSTimeInterval
+    let interval: NSTimeInterval
+    let startTime: NSDate
     
-    func start(sender: AnyObject) {
-        NSUserNotificationCenter.defaultUserNotificationCenter()
+    init(name: String, interval: NSTimeInterval, startTime: NSDate) {
+        self.name = name
+        self.interval = interval
+        self.startTime = startTime
     }
 }

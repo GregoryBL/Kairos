@@ -8,34 +8,95 @@
 
 import Cocoa
 
+extension NSDate {
+    
+    func offsetFrom(date:NSDate) -> NSTimeInterval {
+        let difference = NSCalendar.currentCalendar().components(.Second, fromDate: date, toDate: self, options: [])
+        
+        return Double(difference.second)
+    }
+    
+    func stringWithOffsetFrom(date:NSDate) -> String {
+        
+        let dayHourMinuteSecond: NSCalendarUnit = [.Day, .Hour, .Minute, .Second]
+        let difference = NSCalendar.currentCalendar().components(dayHourMinuteSecond, fromDate: date, toDate: self, options: [])
+        
+        let seconds = "\(difference.second)s"
+        let minutes = "\(difference.minute)m" + " " + seconds
+        let hours = "\(difference.hour)h" + " " + minutes
+        let days = "\(difference.day)d" + " " + hours
+        
+        if difference.day    > 0 { return days }
+        if difference.hour   > 0 { return hours }
+        if difference.minute > 0 { return minutes }
+        if difference.second > 0 { return seconds }
+        return ""
+    }
+    
+}
+
 class TimerSelectViewController: NSViewController {
     
-    var timer = Timer(name: "First Timer", interval: NSTimeInterval(integerLiteral: 10))
-    
-    @IBOutlet weak var timeRemaining: NSTextField!
+    @IBOutlet weak var timeRemainingMessage: NSTextField!
     @IBOutlet weak var timeToSet: NSTextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        3
-        timeRemaining.doubleValue = timer.interval
+    var currentTimer: Timer?
+    var timeRemaining : NSTimeInterval? {
+        
+        didSet {
+            if timeRemaining != nil {
+                timeRemainingMessage.stringValue = "Time Remaining: \(Int(timeRemaining!)) seconds"
+            } else {
+                timeRemainingMessage.stringValue = "How long should the timer be?"
+            }
+        }
     }
     
-    @IBAction func startTimer(sender: AnyObject) {
+
+    
+    @IBAction func startTimer(sender: NSButton) {
         
-        timer.interval = timeToSet.doubleValue
-        timeRemaining.stringValue = timeToSet.stringValue
+        let timer = Timer(name: "First Timer", interval: timeToSet.doubleValue, startTime: NSDate())
         
-        let userInfoDict : NSDictionary = ["interval": self.timer.interval]
-        NSTimer.scheduledTimerWithTimeInterval(self.timer.interval, target: self, selector: #selector(self.timerFinished(_:)), userInfo: userInfoDict, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(timer.interval,
+                                               target: self,
+                                               selector: #selector(self.timerFinished(_:)),
+                                               userInfo: timer,
+                                               repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.5,
+                                               target: self,
+                                               selector: #selector(self.updateTimeLeft(_:)),
+                                               userInfo: timer,
+                                               repeats: true)
     }
     
-    func timerFinished(sender: AnyObject) {
+    func updateTimeLeft(sender: NSTimer) {
+        print("Update Time Left")
+        let timer = (sender.userInfo! as! Timer)
+        if (timer.interval - NSDate().offsetFrom(timer.startTime)) > 0 {
+            timeRemaining = timer.interval - NSDate().offsetFrom(timer.startTime)
+        } else {
+            timeRemaining = nil
+            sender.invalidate()
+        }
+        
+    }
+    
+    func timerFinished(sender: NSTimer) {
         print("Timer Finished")
-        let userInfoDict = (sender as! NSTimer).userInfo! as! [String: NSTimeInterval]
         let notification = NSUserNotification.init()
-        notification.title = "Timer of \(userInfoDict["interval"]!) is Finished"
+        notification.title = "Timer of \(Int((sender.userInfo as! Timer).interval)) is Finished"
         notification.deliveryDate = NSDate(timeIntervalSinceNow: 0)
         NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
     }
 }
+
+
+
+
+
+
+
+
+
+
