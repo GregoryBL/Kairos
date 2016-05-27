@@ -52,7 +52,10 @@ class TimerSelectViewController: NSViewController {
         }
     }
     
-
+    func makeNewTimer(sender: NSButton) {
+        
+        currentTimer = Timer(name: name, interval: timeToSet.doubleValue, startTime: NSDate())
+    }
     
     @IBAction func startTimer(sender: NSButton) {
         
