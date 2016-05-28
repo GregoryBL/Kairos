@@ -11,7 +11,7 @@ import Foundation
 class Timer: NSObject, NSCopying {
     let name: String
     let interval: NSTimeInterval
-    let startTime: NSDate
+    var startTime: NSDate
     
     init(name: String, interval: NSTimeInterval, startTime: NSDate) {
         self.name = name
@@ -21,5 +21,9 @@ class Timer: NSObject, NSCopying {
     
     func copyWithZone(zone: NSZone) -> AnyObject {
         return Timer(name: name, interval: interval, startTime: startTime)
+    }
+    
+    func copyTimer() -> Timer {
+        return Timer(name:name, interval: interval, startTime: startTime.copy() as! NSDate)
     }
 }

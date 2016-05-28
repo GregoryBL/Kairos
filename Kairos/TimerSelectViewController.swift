@@ -33,7 +33,8 @@ class TimerSelectViewController: NSViewController {
     
     @IBAction func startTimer(sender: NSButton) {
         
-        if let timer = currentTimer?.copy() {
+        if let timer = currentTimer?.copyTimer() {
+            timer.startTime = NSDate()
             
             NSTimer.scheduledTimerWithTimeInterval(timer.interval,
                                                    target: self,
@@ -49,7 +50,7 @@ class TimerSelectViewController: NSViewController {
     }
     
     func updateTimeLeft(sender: NSTimer) {
-        print("Update Time Left")
+        
         let timer = (sender.userInfo! as! Timer)
         if (timer.interval - NSDate().offsetFrom(timer.startTime)) > 0 {
             timeRemaining = timer.interval - NSDate().offsetFrom(timer.startTime)
@@ -61,10 +62,10 @@ class TimerSelectViewController: NSViewController {
     }
     
     func timerFinished(sender: NSTimer) {
-        print("Timer Finished")
+
         let notification = NSUserNotification.init()
         notification.title = "Timer of \(Int((sender.userInfo as! Timer).interval)) is Finished"
-        notification.deliveryDate = NSDate(timeIntervalSinceNow: 0)
+        notification.deliveryDate = NSDate()
         NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
     }
 }
