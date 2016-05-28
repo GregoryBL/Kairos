@@ -12,6 +12,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
+    var eventMonitor: EventMonitor?
 
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSSquareStatusItemLength)
     let popover = NSPopover()
@@ -23,6 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         popover.contentViewController = TimerSelectViewController(nibName: "TimerSelectViewController", bundle: nil)
+        
+        eventMonitor = EventMonitor(mask: ( NSEventMask.LeftMouseDownMask.union(NSEventMask.RightMouseDownMask) ))  { [unowned self] event in
+            if self.popover.shown {
+                self.hidePopover(event)
+            }
+        }
+        eventMonitor?.start()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -33,10 +41,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             popover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
         }
+        eventMonitor?.start()
     }
     
     func hidePopover(sender: AnyObject?) {
         popover.performClose(sender)
+        eventMonitor?.stop()
     }
     
     func togglePopover(sender: AnyObject) {
