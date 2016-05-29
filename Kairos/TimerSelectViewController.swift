@@ -14,9 +14,10 @@ class TimerSelectViewController: NSViewController {
     @IBOutlet weak var timeToSet: NSTextField!
     @IBOutlet weak var nameToSet: NSTextField!
     
-    var currentTimer: Timer?
+    var timers: [Timer?] = []
+    var currentTimer: Int?
     var timeRemaining : NSTimeInterval? {
-        
+        // If timeRemaining is set, update the timeRemainingMessage
         didSet {
             if timeRemaining != nil {
                 timeRemainingMessage.stringValue = "Time Remaining: \(Int(timeRemaining!)) seconds"
@@ -26,14 +27,22 @@ class TimerSelectViewController: NSViewController {
         }
     }
     
+    // Put new timer in timer array and update the number of the current one
     @IBAction func makeNewTimer(sender: NSButton) {
         
-        currentTimer = Timer(name: self.nameToSet.stringValue, interval: self.timeToSet.doubleValue, startTime: NSDate())
+        timers.append(Timer(name: self.nameToSet.stringValue, interval: self.timeToSet.doubleValue, startTime: NSDate()))
+        
+        if currentTimer != nil {
+            currentTimer = currentTimer! + 1
+        } else {
+            currentTimer = 0
+        }
     }
     
+    // TODO: Should take an index for the timer array so it can start any one
     @IBAction func startTimer(sender: NSButton) {
         
-        if let timer = currentTimer?.copyTimer() {
+        if let cur = currentTimer, timer = timers[cur]?.copyTimer() {
             timer.startTime = NSDate()
             
             NSTimer.scheduledTimerWithTimeInterval(timer.interval,
@@ -46,6 +55,8 @@ class TimerSelectViewController: NSViewController {
                                                    selector: #selector(self.updateTimeLeft(_:)),
                                                    userInfo: timer,
                                                    repeats: true)
+        } else {
+            timeRemainingMessage.stringValue = "No Timers defined in that position"
         }
     }
     
@@ -64,7 +75,7 @@ class TimerSelectViewController: NSViewController {
     func timerFinished(sender: NSTimer) {
 
         let notification = NSUserNotification.init()
-        notification.title = "Timer of \(Int((sender.userInfo as! Timer).interval)) is Finished"
+        notification.title = "Timer of \(Int((sender.userInfo as! Timer).interval)) seconds is Finished"
         notification.deliveryDate = NSDate()
         NSUserNotificationCenter.defaultUserNotificationCenter().scheduleNotification(notification)
     }
